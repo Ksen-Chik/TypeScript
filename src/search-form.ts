@@ -5,29 +5,21 @@ function dateToString(date: Date) {
 }
 
 export function renderSearchFormBlock(
-  dateIn: string,
-  dateOut: string
+  dateIn?: Date,
+  dateOut?: Date
 ) {
-  let dateInAsDate: Date;
-
   if (!dateIn) {
-    dateInAsDate = new Date(new Date().setDate(new Date().getDate() + 1));
-    dateIn = dateToString(dateInAsDate);
-  } else {
-    dateInAsDate = new Date(dateIn);
+    dateIn = new Date(new Date().setDate(new Date().getDate() + 1));
   }
 
   if (!dateOut) {
-    const dateOutAsDate = new Date(new Date(dateInAsDate).setDate(new Date().getDate() + 2));
-    dateOut = dateToString(dateOutAsDate);
+    dateOut = new Date(new Date(dateIn).setDate(new Date().getDate() + 2));
   }
 
-  const minDate = dateToString(new Date());
+  const minDate = new Date();
 
-  const twoMonthAhead = new Date(new Date().setMonth(new Date().getMonth() + 2));
-  twoMonthAhead.setDate(0);
-
-  const maxDate = dateToString(twoMonthAhead);
+  const maxDate = new Date(new Date().setMonth(new Date().getMonth() + 2));
+  maxDate.setDate(0);
 
   renderBlock(
     'search-form-block',
@@ -48,11 +40,11 @@ export function renderSearchFormBlock(
         <div class="row">
           <div>
             <label for="check-in-date">Дата заезда</label>
-            <input id="check-in-date" type="date" value=${dateIn} min=${minDate} max=${maxDate} name="checkin" />
+            <input id="check-in-date" type="date" value=${dateToString(dateIn)} min=${dateToString(minDate)} max=${dateToString(maxDate)} name="checkin" />
           </div>
           <div>
             <label for="check-out-date">Дата выезда</label>
-            <input id="check-out-date" type="date" value=${dateOut} min=${minDate} max=${maxDate} name="checkout" />
+            <input id="check-out-date" type="date" value=${dateToString(dateOut)} min=${dateToString(minDate)} max=${dateToString(maxDate)} name="checkout" />
           </div>
           <div>
             <label for="max-price">Макс. цена суток</label>

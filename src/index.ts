@@ -5,10 +5,10 @@ import { renderToast } from './lib.js'
 
 window.addEventListener('DOMContentLoaded', () => {
   renderUserBlock('Ksu', '/img/avatar.png', 5)
-  renderSearchFormBlock('','')
+  renderSearchFormBlock()
   renderSearchStubBlock()
   renderToast(
-    {text: 'Это пример уведомления. Используйте его при необходимости', type: 'success'},
-    {name: 'Понял', handler: () => {console.log('Уведомление закрыто')}}
+    { text: 'Это пример уведомления. Используйте его при необходимости', type: 'success' },
+    { name: 'Понял', handler: () => { console.log('Уведомление закрыто') } }
   )
 })
