@@ -24,7 +24,7 @@ export function renderSearchFormBlock(
   renderBlock(
     'search-form-block',
     `
-    <form>
+    <form id="search-form">
       <fieldset class="search-filedset">
         <div class="row">
           <div>
@@ -58,4 +58,25 @@ export function renderSearchFormBlock(
     </form>
     `
   )
+
+  function submit() {
+    const checkin = document.getElementById('check-in-date') as HTMLInputElement;
+    const checkout = document.getElementById('check-out-date') as HTMLInputElement;
+    const searchData = { dateIn: new Date(checkin.value), dateOut: new Date(checkout.value) } as SearchFormData;
+    search(searchData);
+  }
+
+  const form = document.getElementById('search-form');
+  form.addEventListener('submit', submit);
+}
+
+interface SearchFormData {
+  dateIn: Date,
+  dateOut: Date
+}
+
+function search(
+  data: SearchFormData
+) {
+  console.log(data);
 }
