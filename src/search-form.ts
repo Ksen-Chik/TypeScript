@@ -1,29 +1,29 @@
 import { renderBlock } from './lib.js'
 
 function dateToString(date: Date) {
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }
 
 export function renderSearchFormBlock(
-  dateIn?: Date,
-  dateOut?: Date
+    dateIn?: Date,
+    dateOut?: Date
 ) {
-  if (!dateIn) {
-    dateIn = new Date(new Date().setDate(new Date().getDate() + 1));
-  }
+    if (!dateIn) {
+        dateIn = new Date(new Date().setDate(new Date().getDate() + 1));
+    }
 
-  if (!dateOut) {
-    dateOut = new Date(new Date(dateIn).setDate(new Date().getDate() + 2));
-  }
+    if (!dateOut) {
+        dateOut = new Date(new Date(dateIn).setDate(new Date().getDate() + 2));
+    }
 
-  const minDate = new Date();
+    const minDate = new Date();
 
-  const maxDate = new Date(new Date().setMonth(new Date().getMonth() + 2));
-  maxDate.setDate(0);
+    const maxDate = new Date(new Date().setMonth(new Date().getMonth() + 2));
+    maxDate.setDate(0);
 
-  renderBlock(
-    'search-form-block',
-    `
+    renderBlock(
+        'search-form-block',
+        `
     <form id="search-form">
       <fieldset class="search-filedset">
         <div class="row">
@@ -57,17 +57,19 @@ export function renderSearchFormBlock(
       </fieldset>
     </form>
     `
-  )
+    )
 
-  function submit() {
-    const checkin = document.getElementById('check-in-date') as HTMLInputElement;
-    const checkout = document.getElementById('check-out-date') as HTMLInputElement;
-    const searchData = { dateIn: new Date(checkin.value), dateOut: new Date(checkout.value) } as SearchFormData;
-    search(searchData);
-  }
+    function submit() {
+        const checkin = document.getElementById('check-in-date') as HTMLInputElement;
+        const checkout = document.getElementById('check-out-date') as HTMLInputElement;
+        const searchData = { dateIn: new Date(checkin.value), dateOut: new Date(checkout.value) } as SearchFormData;
+        search(searchData);
+    }
 
-  const form = document.getElementById('search-form');
-  form.addEventListener('submit', submit);
+    const form: HTMLElement | null = document.getElementById('search-form');
+    if (form) {
+        form.addEventListener('submit', submit);
+    }
 }
 
 interface SearchFormData {
@@ -76,7 +78,7 @@ interface SearchFormData {
 }
 
 function search(
-  data: SearchFormData
+    data: SearchFormData
 ) {
-  console.log(data);
+    console.log(data);
 }
