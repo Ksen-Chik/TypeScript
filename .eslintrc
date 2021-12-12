@@ -1,4 +1,9 @@
 {
+    "globals": {
+        "document": true,
+        "foo": true,
+        "window": true
+      },
   "root": true,
   "parser": "@typescript-eslint/parser",
   "plugins": [
